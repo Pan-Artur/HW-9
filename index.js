@@ -107,7 +107,7 @@ for (let number of numbers) {
     total += number;
 }
 
-console.log(total);
+console.log(`Загальна сума чисел дорівнює ${total}`);
 
 //Task-7
 
@@ -117,7 +117,9 @@ let login = prompt("Введіть свій логін, для входу.");
 function isLoginValid(login) {
     let loginValidResult;
 
-    if (login.length < 4 || login.length > 16) {
+    if (login === null) {
+        loginValidResult = "error";
+    } else if (login.length < 4 || login.length > 16) {
         loginValidResult = true;
     } else {
         loginValidResult = false;
@@ -144,11 +146,15 @@ function addLogin(logins, login) {
     if (isLoginValid(login) === true) {
       message = alert("Помилка! Логін повинен бути від 4 до 16 символів!");
     } else {
-        if (isLoginUnique(logins, login) === false) {
-          message = alert("Такий логін уже використовується!");
+        if (isLoginValid(login) === "error") {
+            message = alert("Операція була скасованою!");
         } else {
-          logins.push(login);
-          message = alert("Логін успішно доданий!");
+            if (isLoginUnique(logins, login) === false) {
+                message = alert("Такий логін уже використовується!");
+            } else {
+                logins.push(login);
+                message = alert("Логін успішно доданий!");
+            }
         }
     }
 
